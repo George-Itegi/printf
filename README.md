@@ -1,1 +1,1 @@
-﻿# _printf  
+printf
