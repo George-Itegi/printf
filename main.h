@@ -1,33 +1,44 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
 
-
 /**
- * struct format - Struct for format
- * @specifiers: Struct format
+ * struct convert - defines a structure for symbols and functions
+ *
+ * @sym: The operator
  * @f: The function associated
  */
-
-typedef struct specifiers
+struct convert
 {
-	char specifiers;
+	char *sym;
 	int (*f)(va_list);
-} specifiers_t;
+};
+typedef struct convert conver_t;
 
-/*prototypes*/
+/**
+ * Functions
+ */
+int recording_error(const char *format, conver_t f_list[], va_list arg_list);
 int _printf(const char *format, ...);
-int get_function(char s, va_list args);
-int _putchar(char c);
-
-/*Conversion specifiers*/
-int print_char(va_list args);
-int print_string(va_list args);
-int print_digit(va_list args);
-int print_mod(va_list args);
-int print_rev_string(va_list args);
+int _write_char(char);
+int print_char(va_list);
+int print_string(va_list);
+int print_percent(va_list);
+int print_integer(va_list);
+int print_number(va_list);
+int print_binary(va_list);
+int unsigned_integer(va_list);
+int print_unsgned_number(unsigned int);
+int print_reversed(va_list);
+/**
+ * Suport functions
+ */
+unsigned int base_len(unsigned int, int);
+char *rev_string(char *);
+void write_base(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
 
 #endif
