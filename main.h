@@ -1,41 +1,33 @@
-#ifndef HOLBERTON_H
-#define HOLBERTON_H
+#ifndef MAIN_H
+#define MAIN_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <unistd.h>
+
+
 /**
- * struct type - connect conversion specifiers with the correct print function
- * @print: a function pointer for the print functions
- * @identifier: the conversion specifier
+ * struct format - Struct for format
+ * @specifiers: Struct format
+ * @f: The function associated
  */
-typedef struct type
+
+typedef struct specifiers
 {
-	char *identifier;
-	int (*print)(va_list);
-} type_t;
+	char specifiers;
+	int (*f)(va_list);
+} specifiers_t;
 
+/*prototypes*/
+int _printf(const char *format, ...);
+int get_function(char s, va_list args);
 int _putchar(char c);
-int (*get_function(const char *specifier))(va_list);
-int _printf(const char *, ...);
-int _strlen(char *);
-int print_rev(va_list args);
-int rot13(va_list args);
-int print_number(unsigned int n);
-int countDigits(unsigned int num);
-int countOctal(unsigned int num);
-int countBinary(unsigned int num);
-int print_b(va_list args);
-int print_o(va_list args);
-int print_d(va_list args);
-int print_x(va_list args);
-void print_lowerHex(unsigned int num, int *count);
-int print_X(va_list args);
-void print_upperHex(unsigned int num, int *count);
-int print_p(va_list args);
-int print_s(va_list args);
-int print_c(va_list args);
-int print_u(va_list args);
-int print_F(va_list args);
 
-#endif /* HOLBERTON_H */
+/*Conversion specifiers*/
+int print_char(va_list args);
+int print_string(va_list args);
+int print_digit(va_list args);
+int print_mod(va_list args);
+int print_rev_string(va_list args);
+
+#endif

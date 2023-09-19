@@ -1,58 +1,46 @@
 #include "main.h"
-
+#include <unistd.h>
 /**
- * _printf - print output to stdout according to a format string
- * @format: the format of the string to print
+ * _printf - Emulate the original.
  *
- * Description: This program emulates some of the functionality of the standard
- * printf function. It does not handle precision, field width, or any of the
- * flags. It does handle all of the format specifiers except "%f" plus some
- * special format specifiers: "%b" prints a number in binary, "%R" encodes a
- * string in ROT13, and "%r" prints a string in reverse. %F is just a little
- * joke that allows you to print an expletive regardless of what you pass the
- * function `print_F`
+ * @format: Format by specifier.
  *
- * Return: number of characters printed (excluding null byte)
+ * Return: count of chars.
  */
-
 int _printf(const char *format, ...)
 {
-	int count = 0;
+	int i = 0, count = 0, count_fun;
 	va_list args;
-	int (*function)(va_list) = NULL;
 
 	va_start(args, format);
-
-	while (*format)
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	while (format[i])
 	{
-		if (*format == '%' && *(format + 1) != '%')
+		count_fun = 0;
+		if (format[i] == '%')
 		{
-			format++;
-			function = get_function(format);
-			if (*(format) == '\0')
-				return (-1);
-			else if (function == NULL)
+			if (!format[i + 1] || (format[i + 1] == ' ' && !format[i + 2]))
 			{
-				_putchar(*(format - 1));
-				_putchar(*format);
-				count += 2;
+				count = -1;
+				break;
 			}
-			else
-				count += function(args);
-		}
-		else if (*format == '%' && *(format + 1) == '%')
-		{
-			format++;
-			_putchar('%');
-			count++;
+			count_fun += get_function(format[i + 1], args);
+			if (count_fun == 0)
+				count += _putchar(format[i + 1]);
+			if (count_fun == -1)
+				count = -1;
+			i++;
 		}
 		else
 		{
-			_putchar(*format);
-			count++;
+			(count == -1) ? (_putchar(format[i])) : (count += _putchar(format[i]));
 		}
-
-		format++;
+		i++;
+		if (count != -1)
+			count += count_fun;
 	}
 	va_end(args);
 	return (count);
