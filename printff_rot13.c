@@ -18,6 +18,7 @@ int printf_rot13(va_list args)
 		if ((*s >= 'a' && *s <= 'z') || (*s >= 'A' && *s <= 'Z'))
 		{
 			char base = (*s >= 'a' && *s <= 'z') ? 'a' : 'A';
+
 			_putchar(((*s - base + 13) % 26) + base);
 			counter++;
 		}
@@ -28,6 +29,6 @@ int printf_rot13(va_list args)
 		}
 	}
 
-	return counter;
+	return (counter);
 }
 

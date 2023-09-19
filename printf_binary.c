@@ -14,6 +14,7 @@ int printf_bin(va_list val)
 	for (int i = 31; i >= 0; i--)
 	{
 		int bit = (num >> i) & 1;
+
 		if (bit || !leading_zeros)
 		{
 			_putchar('0' + bit);
@@ -28,5 +29,5 @@ int printf_bin(va_list val)
 		cont = 1;
 	}
 
-	return cont;
+	return (cont);
 }
