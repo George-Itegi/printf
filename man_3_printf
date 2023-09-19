@@ -1,134 +1,87 @@
-.\" _printf man page
-.\"
-.\"
-.\"
-.\"
-.\"
-.TH _PRINTF "August 05 2022" "0.1" "Library functions manual"
-
+./" This is _printf manpage
+.TH man 3 "17 May 2020" "1.0" "_printf man page"
 .SH NAME
-.SH ""
-
 .B _printf
-- custom version for printf function.
-
+- format and data.
 .SH SYNOPSIS
-.SH ""
-
-#include "main.h"
-
-int _printf(const char *[FORMAT], ...);
-
+_printf FORMAT [ARGUMENT]...
 .SH DESCRIPTION
-.SH ""
+Print ARGUMENT(s) according to FORMAT:
+
+\\"     double quote.
+
+\\\\     backslash.
+
+\\n     new line.
+
+\\r     carriage return.
+
+\\t     horizontal tab.
+
+%%     a single %.
+
+.SH CONVERSION CHARACTERS
+.B The conversion specifiers and their meanings are:
+.IP -b 
+The unsigned int argument is converted to binary.
+
+.IP -d,i
+The int argument is converted to signed decimal notation.
+
+.IP -c
+The int argument is converted to an unsigned char, and the resulting character is written.
 
 
-The printf function sends formatted output to stdout.
-A custom _printf() for learning purposes was developed by cohort  #8 students Nicks and Mose Parsanka.
-_printf() function format string is a character string, beginning and ending in its initial shift state, if any. 
-These arguments are placed using the percentage '%' operator
+.IP -o,u,x,X
+The unsigned int argument is converted to ( ) notation:
 
-.SS Compilation
+unsigned octal: (o).
 
-.P
-.RS
-#include "main.h"
+unsigned decimal: (u).
 
-$ gcc -Wall -Werror -Wextra -pedantic -Wno-format *.c
-$ gcc -Wall -Werror -Wextra -pedantic -g -Wno-format *.c (for gdb debbuging)
-.RE
+unsigned hexadecimal: (x and X).
 
-.SS Printing
-.RS
+.IP -s
+Characters from the array are written up to (but not including) a terminating null byte ('\0').
+	
+.IP -S 
+Characters from the array are written up to (but not including) a terminating null byte ('\0').
 
-int _printf(const char *[FORMAT], ...);
+Not include characters (0 < ASCII value < 32 or >= 127), are printed \x, , followed by the ASCII code value in hexadecimal (upper case - always 2 characters).
 
-FORMAT is the string that takes n specifier followed by a '%'
-symbol. i.e. "Hello this is %s from %d cohort". '...' is the variadic \
-(any type of variable).
+.IP -p
+The void * pointer argument is printed in hexadecimal (as if by %#x or %#lx).
 
-.SS Example
+.SH EXAMPLES
 
-.RS
+.IP -print a string.
+_printf("This is a string");
+_printf("%s\n", "I am a string too!");
 
-.B Input
-.PP
-_printf("Hello this is %s from %d cohort\\n\\", 33);
-.PP
-.B Output
-.PP
-Hello this is %s from %d cohort
-.RE
+.IP print char.
+_printf("Character:[%c]\n", 'H');
 
-.SS Return Value
+.IP -print integuer.
+_printf("%d, %i\n", 2, 5);
 
-Return value is a n number of characters except NULL
+.SH SEE ALSO
 
-.SH FLAG SPECIFIERS
-.SH ""
+.I printf(1), printf(3).
 
-custom and non-custom specifier modifiers
+.SH BUGS
 
-.SH THE LENGTH MODIFIERS
-.SH ""
+No known bugs.
 
-Length modifiers.
+.SH AUTHOR
 
-.SH THE CONVERSION SPECIFIERS
-.SH ""
+David Orozco & Jose Parrales.
 
-.RS
-Current arguments handled by conversion specifiers:
+.SH COPYRIGHT
 
-.IT
-.B %
-- % symbol is set without argument and conversion specification has to be'%%'.
+Copyright © 2020 Holberton School B.
 
-.IT
-.B c
-- integer or char argument converted to unsigned char.
 
-.IT
-.B d, i
-- int argument is converted to signed decimal integer.
+Copyright © SS64.com 1999-2020.
 
-.IT
-.B s
-- string argument. _printf handles s conversion specifier if the argument value
- is not a pointer to a literal string. \
 
-.IT
-
-.B o, u, x, X
-- unsigned int argument converted to unsigned octal (o), unsigned decimal (u),
-unsigned hexidecimal notation (x) for lower case and (X) for upper case
-
-.IT
-.B b
-- The unsigned int argument is converted to binary.
-
-.IT
-.B p
-- The pointer is printed in hexidecimal format preceded by '0x'.
-
-.IT
-.B r, R
-- 'r' prints string in reverse. 'R' prints encrypted rot13.
-
-.IT
-.B S
-- ascii <32 & >127 has to appear in the argument string. converted to
-hexadecimal preceded by \x
-
-.RE
-
-.P
-
-.SH "AUTHORS"
-.SH ""
-
-Nicks Gitobu and Musa Parsanka
-
-.B Twitter
-.PP
-@_pronicks @musa_parsanka
+Copyright Â© 2010 Free Software Foundation, Inc. License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
