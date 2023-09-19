@@ -6,6 +6,9 @@
  */
 int _printf(const char * const format, ...)
 {
+va_list args;
+va_start(args, format);
+
 	convert_match m[] = {
 		{"%s", printf_string}, {"%c", printf_char},
 		{"%%", printf_37},
@@ -14,15 +17,18 @@ int _printf(const char * const format, ...)
 		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
 		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
 	};
+int i;
+
 while (format[i] != '\0')
 {
-int j = 0;
+long unsigned int j = 0;
 int found = 0;
 
 while (j < sizeof(m) / sizeof(m[0]))
 {
 if (strncmp(m[j].id, &format[i], strlen(m[j].id)) == 0)
 {
+int len=0;
 len += m[j].f(args);
 i += strlen(m[j].id);
 found = 1;

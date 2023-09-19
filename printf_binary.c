@@ -10,8 +10,9 @@ int printf_bin(va_list val)
 	unsigned int num = va_arg(val, unsigned int);
 	int cont = 0;
 	int leading_zeros = 1;
+    int i;
 
-	for (int i = 31; i >= 0; i--)
+	for (i = 31; i >= 0; i--)
 	{
 		int bit = (num >> i) & 1;
 
