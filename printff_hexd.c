@@ -6,7 +6,7 @@
  */
 int printf_hex(va_list val)
 {
-	int i x;
+	int  x;
 	int *arr;
 	int count = 0;
 	unsigned int nam = va_arg(val, unsigned int);
@@ -18,14 +18,14 @@ int printf_hex(va_list val)
 		count++;
 	}
 	count++;
-	arr = malloc(counter * sizeof(int));
+	arr = malloc(count * sizeof(int));
 
-	for (x = 0; i < count; x++)
+	for (x = 0; x < count; x++)
 	{
 		arr[x] = temp % 16;
 		temp /= 16;
 	}
-	for (i = count - 1; x >= 0; x--)
+	for (x = count - 1; x >= 0; x--)
 	{
 		if (arr[x] > 9)
 			arr[x] = arr[x] + 39;

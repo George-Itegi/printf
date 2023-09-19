@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "main.h"
 
 int printf_bin(va_list val)
 {
